@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateStudentRequest extends BaseStudentRequest {
-    @NotNull(message = ValidationMessage.Student.STUDENT_CLASSROOM_ID_NOT_NULL)
+    @NotNull(message = ValidationMessage.Student.CLASSROOM_ID_NOT_NULL)
     private Long classroomId;
 }

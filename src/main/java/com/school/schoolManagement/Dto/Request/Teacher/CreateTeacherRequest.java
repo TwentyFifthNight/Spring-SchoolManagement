@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateTeacherRequest extends BaseTeacherRequest {
-    @NotNull(message = ValidationMessage.Teacher.TEACHER_PESEL_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Teacher.TEACHER_PESEL_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Teacher.PESEL_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Teacher.PESEL_NOT_EMPTY)
     @Pattern(regexp = ValidationMessage.General.PESEL_REGEX,
-            message = ValidationMessage.Teacher.TEACHER_PESEL_NOT_VALID)
+            message = ValidationMessage.Teacher.PESEL_NOT_VALID)
     private String pesel;
 }

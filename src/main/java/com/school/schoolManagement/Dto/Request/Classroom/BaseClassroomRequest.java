@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BaseClassroomRequest {
-    @NotNull(message = ValidationMessage.Classroom.CLASSROOM_SYMBOL_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Classroom.CLASSROOM_SYMBOL_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Classroom.SYMBOL_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Classroom.SYMBOL_NOT_EMPTY)
     private String symbol;
 
-    @NotNull(message = ValidationMessage.Classroom.CLASSROOM_SUPERVISOR_ID_NOT_NULL)
+    @NotNull(message = ValidationMessage.Classroom.SUPERVISOR_ID_NOT_NULL)
     private Long supervisorId;
 }

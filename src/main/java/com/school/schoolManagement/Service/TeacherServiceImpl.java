@@ -72,14 +72,14 @@ public class TeacherServiceImpl implements TeacherService{
     private void checkIfTeacherExists(String pesel) throws TeacherAlreadyExistException{
         if (teacherRepository.existsByPesel(pesel)) {
             log.info(MessageFormat.format(LogMessage.getString("AlreadyExists"), pesel));
-            throw new TeacherAlreadyExistException(BusinessMessage.Teacher.TEACHER_ALREADY_EXISTS);
+            throw new TeacherAlreadyExistException(BusinessMessage.Teacher.ALREADY_EXISTS);
         }
     }
 
     public Teacher findTeacherByTeacherId(Long id) throws TeacherNotFoundException{
         return teacherRepository.findById(id).orElseThrow(() -> {
             log.info(MessageFormat.format(LogMessage.getString("NotFound"), id));
-            return new TeacherNotFoundException(BusinessMessage.Teacher.TEACHER_NOT_FOUND);
+            return new TeacherNotFoundException(BusinessMessage.Teacher.NOT_FOUND);
         });
     }
 }

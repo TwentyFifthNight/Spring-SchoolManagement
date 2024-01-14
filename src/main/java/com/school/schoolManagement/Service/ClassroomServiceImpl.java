@@ -75,7 +75,7 @@ public class ClassroomServiceImpl implements ClassroomService{
 
         if (classroomList.isEmpty()) {
             log.info(LogMessage.getString("ListEmpty"));
-            throw new ClassroomNotFoundException(BusinessMessage.Classroom.CLASSROOM_LIST_EMPTY);
+            throw new ClassroomNotFoundException(BusinessMessage.Classroom.LIST_EMPTY);
         }
 
         log.info(LogMessage.getString("Listed"));
@@ -85,14 +85,14 @@ public class ClassroomServiceImpl implements ClassroomService{
     public Classroom findClassroomByClassroomId(Long id) throws ClassroomNotFoundException{
         return classroomRepository.findById(id).orElseThrow(() -> {
             log.info(MessageFormat.format(LogMessage.getString("NotFound"), id));
-            return new ClassroomNotFoundException(BusinessMessage.Classroom.CLASSROOM_NOT_FOUND);
+            return new ClassroomNotFoundException(BusinessMessage.Classroom.NOT_FOUND);
         });
     }
 
     private void checkIfClassroomExists(String symbol) throws ClassroomAlreadyExistException {
         if (classroomRepository.existsBySymbol(symbol)) {
             log.error(MessageFormat.format(LogMessage.getString("AlreadyExists"), symbol));
-            throw new ClassroomAlreadyExistException(BusinessMessage.Classroom.CLASSROOM_ALREADY_EXISTS);
+            throw new ClassroomAlreadyExistException(BusinessMessage.Classroom.ALREADY_EXISTS);
         }
     }
 }
