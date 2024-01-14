@@ -17,6 +17,7 @@ public class Teacher {
     private String lastName;
     private String pesel;
     private String phone;
-    @OneToOne(mappedBy = "teacher", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "classroom_id", referencedColumnName = "id")
     private Classroom supervisedClass;
 }
