@@ -2,7 +2,8 @@ package com.school.schoolManagement.Service;
 
 import com.school.schoolManagement.Dto.AddressDto;
 import com.school.schoolManagement.Dto.Converter.AddressDtoConverter;
-import com.school.schoolManagement.Dto.Request.Address.BaseAddressRequest;
+import com.school.schoolManagement.Dto.Request.Address.CreateAddressRequest;
+import com.school.schoolManagement.Dto.Request.Address.UpdateAddressRequest;
 import com.school.schoolManagement.Exception.Address.AddressNotFoundException;
 import com.school.schoolManagement.Helper.BusinessMessage;
 import com.school.schoolManagement.Model.Address;
@@ -17,7 +18,7 @@ import java.util.ResourceBundle;
 
 @Service
 @Slf4j
-public class AddressServiceImpl {
+public class AddressServiceImpl implements AddressService{
     private final AddressRepository addressRepository;
     private final AddressDtoConverter converter;
     private final ResourceBundle addressLogMessage;
@@ -30,7 +31,7 @@ public class AddressServiceImpl {
         addressLogMessage = ResourceBundle.getBundle("i18n/AddressLogMessage", Locale.getDefault());
     }
 
-    public void createAddress(BaseAddressRequest request) throws AddressNotFoundException{
+    public void createAddress(CreateAddressRequest request) throws AddressNotFoundException{
         Address address = new Address();
         address.setHouseNumber(request.getHouseNumber());
         address.setStreet(request.getStreet());
@@ -41,7 +42,7 @@ public class AddressServiceImpl {
         log.info(addressLogMessage.getString("addressCreated"));
     }
 
-    public void updateAddress(Long id, BaseAddressRequest request) throws AddressNotFoundException{
+    public void updateAddress(Long id, UpdateAddressRequest request) throws AddressNotFoundException{
         Address address = findAddressByAddressId(id);
 
         address.setHouseNumber(request.getHouseNumber());
