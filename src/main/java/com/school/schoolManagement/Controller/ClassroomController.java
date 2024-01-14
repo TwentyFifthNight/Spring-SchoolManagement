@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/classrooms")
+@RequestMapping("/api/classroom")
 public class ClassroomController {
     private final ClassroomService classroomService;
 
@@ -20,14 +20,14 @@ public class ClassroomController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createClassroom(@Valid CreateClassroomRequest request) {
+    public ResponseEntity<Void> createClassroom(@RequestBody @Valid CreateClassroomRequest request) {
         classroomService.createClassroom(request);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateClassroom(@PathVariable Long id,
-                                                @Valid UpdateClassroomRequest request) {
+                                                @RequestBody @Valid UpdateClassroomRequest request) {
         classroomService.updateClassroom(id, request);
         return ResponseEntity.ok().build();
     }

@@ -20,7 +20,7 @@ public class Address {
     private String city;
     private String zipCode;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
     private List<Student> studentList;
 
 }

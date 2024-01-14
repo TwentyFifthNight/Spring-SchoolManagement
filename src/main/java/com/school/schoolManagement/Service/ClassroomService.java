@@ -16,7 +16,7 @@ public interface ClassroomService {
 
     ClassroomDto findClassroomById(Long id);
 
-    public Classroom findClassroomByClassroomId(Long id);
+    Classroom findClassroomByClassroomId(Long id);
 
     List<ClassroomDto> findAllClassrooms();
 }

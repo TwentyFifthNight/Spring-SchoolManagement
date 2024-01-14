@@ -20,14 +20,15 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createAddress(@Valid CreateAddressRequest request) {
+    public ResponseEntity<Void> createAddress(@RequestBody @Valid CreateAddressRequest request) {
+        System.out.println(request);
         addressService.createAddress(request);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateAddress(@PathVariable Long id,
-                                              @Valid UpdateAddressRequest request) {
+                                              @RequestBody @Valid UpdateAddressRequest request) {
         addressService.updateAddress(id, request);
         return ResponseEntity.ok().build();
     }

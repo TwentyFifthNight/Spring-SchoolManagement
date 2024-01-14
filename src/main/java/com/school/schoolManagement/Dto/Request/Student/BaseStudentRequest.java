@@ -18,4 +18,7 @@ public class BaseStudentRequest {
     @NotNull(message = ValidationMessage.Student.STUDENT_LAST_NAME_NOT_NULL)
     @NotEmpty(message = ValidationMessage.Student.STUDENT_LAST_NAME_NOT_EMPTY)
     private String lastName;
+
+    @NotNull(message = ValidationMessage.Student.STUDENT_ADDRESS_NOT_NULL)
+    private Long addressId;
 }
