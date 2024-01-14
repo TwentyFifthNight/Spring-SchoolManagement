@@ -76,7 +76,7 @@ public class TeacherServiceImpl implements TeacherService{
         }
     }
 
-    protected Teacher findTeacherByTeacherId(Long id) throws TeacherNotFoundException{
+    public Teacher findTeacherByTeacherId(Long id) throws TeacherNotFoundException{
         return teacherRepository.findById(id).orElseThrow(() -> {
             log.info(MessageFormat.format(teacherLogMessage.getString("teacherNotFound"), id));
             return new TeacherNotFoundException(BusinessMessage.Teacher.TEACHER_NOT_FOUND);
