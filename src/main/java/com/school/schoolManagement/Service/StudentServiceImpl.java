@@ -8,7 +8,6 @@ import com.school.schoolManagement.Exception.Student.StudentAlreadyExistExceptio
 import com.school.schoolManagement.Exception.Student.StudentNotFoundException;
 import com.school.schoolManagement.Helper.BusinessMessage;
 import com.school.schoolManagement.Helper.StudentNumberGenerator;
-import com.school.schoolManagement.Helper.StudentNumberGeneratorImpl;
 import com.school.schoolManagement.Model.Student;
 import com.school.schoolManagement.Repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -23,18 +22,20 @@ import java.util.ResourceBundle;
 public class StudentServiceImpl implements StudentService{
     private final StudentRepository studentRepository;
     private final ClassroomService classroomService;
+    private final AddressService addressService;
     private final StudentDtoConverter converter;
-    private final ResourceBundle StudentLogMessage;
+    private final ResourceBundle LogMessage;
     private final StudentNumberGenerator studentNumberGenerator;
 
     public StudentServiceImpl(StudentRepository studentRepository, ClassroomService classroomService,
-                              StudentDtoConverter converter){
+                              AddressService addressService, StudentDtoConverter converter, StudentNumberGenerator studentNumberGenerator){
         this.studentRepository = studentRepository;
         this.classroomService = classroomService;
+        this.addressService = addressService;
         this.converter = converter;
+        this.studentNumberGenerator = studentNumberGenerator;
 
-        StudentLogMessage = ResourceBundle.getBundle("i18n/StudentLogMessage", Locale.getDefault());
-        studentNumberGenerator = new StudentNumberGeneratorImpl();
+        LogMessage = ResourceBundle.getBundle("i18n/StudentLogMessage", Locale.getDefault());
     }
 
     public void createStudent(CreateStudentRequest request) throws StudentAlreadyExistException{
@@ -45,9 +46,10 @@ public class StudentServiceImpl implements StudentService{
         student.setLastName(request.getLastName());
         student.setStudentNumber(studentNumberGenerator.generate());
         student.setPesel(request.getPesel());
+        student.setAddress(addressService.findAddressByAddressId(request.getAddressId()));
 
         studentRepository.save(student);
-        log.info(StudentLogMessage.getString("studentCreated"));
+        log.info(LogMessage.getString("Created"));
     }
 
     public void updateStudent(Long id, UpdateStudentRequest request) throws StudentNotFoundException{
@@ -58,7 +60,7 @@ public class StudentServiceImpl implements StudentService{
         student.setClassroom(classroomService.findClassroomByClassroomId(request.getClassroomId()));
 
         studentRepository.save(student);
-        log.info(MessageFormat.format(StudentLogMessage.getString("studentUpdated"), id));
+        log.info(MessageFormat.format(LogMessage.getString("Updated"), id));
     }
 
     public void addStudentToClassroom(Long id, Long classroomId) throws StudentNotFoundException{
@@ -66,7 +68,7 @@ public class StudentServiceImpl implements StudentService{
         student.setClassroom(classroomService.findClassroomByClassroomId(classroomId));
 
         studentRepository.save(student);
-        log.info(MessageFormat.format(StudentLogMessage.getString("studentAddedToClassroom"), id, classroomId));
+        log.info(MessageFormat.format(LogMessage.getString("AddedToClassroom"), id, classroomId));
     }
 
     public void removeStudentFromClassroom(Long id) throws StudentNotFoundException{
@@ -74,26 +76,26 @@ public class StudentServiceImpl implements StudentService{
         student.setClassroom(null);
 
         studentRepository.save(student);
-        log.info(MessageFormat.format(StudentLogMessage.getString("studentRemovedFromClassroom"), id));
+        log.info(MessageFormat.format(LogMessage.getString("RemovedFromClassroom"), id));
     }
 
     public void deleteStudent(Long id) throws StudentNotFoundException{
         Student student = findStudentByStudentId(id);
 
         studentRepository.delete(student);
-        log.info(MessageFormat.format(StudentLogMessage.getString("studentDeleted"), id));
+        log.info(MessageFormat.format(LogMessage.getString("Deleted"), id));
     }
 
     public StudentDto findStudentById(Long id) throws StudentNotFoundException{
         Student student = findStudentByStudentId(id);
 
-        log.info(MessageFormat.format(StudentLogMessage.getString("studentFound"), id));
+        log.info(MessageFormat.format(LogMessage.getString("Found"), id));
         return converter.convert(student);
     }
 
     private void checkIfStudentExists(String pesel) throws StudentAlreadyExistException{
         if (studentRepository.existsByPesel(pesel)) {
-            log.error(MessageFormat.format(StudentLogMessage.getString("studentAlreadyExists"), pesel));
+            log.error(MessageFormat.format(LogMessage.getString("AlreadyExists"), pesel));
             throw new StudentAlreadyExistException(BusinessMessage.Student.STUDENT_ALREADY_EXISTS);
         }
     }
@@ -101,7 +103,7 @@ public class StudentServiceImpl implements StudentService{
     private Student findStudentByStudentId(Long id) throws StudentNotFoundException{
         return studentRepository.findById(id)
                 .orElseThrow(() -> {
-                    log.error(MessageFormat.format(StudentLogMessage.getString("studentNotFound"), id));
+                    log.error(MessageFormat.format(LogMessage.getString("NotFound"), id));
                     return new StudentNotFoundException(BusinessMessage.Student.STUDENT_NOT_FOUND);
                 });
     }

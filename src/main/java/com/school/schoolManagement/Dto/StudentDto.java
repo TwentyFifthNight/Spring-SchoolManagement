@@ -6,6 +6,6 @@ public record StudentDto(
         String lastName,
         String pesel,
         String studentNumber,
-        AddressDto addressList,
+        AddressDto address,
         Long classroomId
 ) { }

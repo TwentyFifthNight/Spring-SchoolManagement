@@ -22,7 +22,7 @@ public class TeacherDtoConverter {
                 from.getLastName(),
                 from.getPesel(),
                 from.getPhone(),
-                teacherClassroomDtoConverter.convert(from.getSupervisedClass())
+                from.getSupervisedClass() != null ? teacherClassroomDtoConverter.convert(from.getSupervisedClass()) : null
         );
     }
 

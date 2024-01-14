@@ -16,6 +16,5 @@ public class BaseClassroomRequest {
     private String symbol;
 
     @NotNull(message = ValidationMessage.Classroom.CLASSROOM_SUPERVISOR_ID_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Classroom.CLASSROOM_SUPERVISOR_ID_NOT_EMPTY)
     private Long supervisorId;
 }

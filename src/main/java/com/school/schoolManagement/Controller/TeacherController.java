@@ -18,14 +18,14 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createTeacher(@Valid CreateTeacherRequest request) {
+    public ResponseEntity<Void> createTeacher(@RequestBody @Valid CreateTeacherRequest request) {
         teacherService.createTeacher(request);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateTeacher(@PathVariable Long id,
-                                              @Valid UpdateTeacherRequest request) {
+                                              @RequestBody @Valid UpdateTeacherRequest request) {
         teacherService.updateTeacher(id, request);
         return ResponseEntity.ok().build();
     }

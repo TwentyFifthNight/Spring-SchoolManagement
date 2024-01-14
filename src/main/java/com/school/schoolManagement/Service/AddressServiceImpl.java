@@ -21,14 +21,14 @@ import java.util.ResourceBundle;
 public class AddressServiceImpl implements AddressService{
     private final AddressRepository addressRepository;
     private final AddressDtoConverter converter;
-    private final ResourceBundle addressLogMessage;
+    private final ResourceBundle LogMessage;
 
     public AddressServiceImpl(AddressRepository addressRepository,
                           AddressDtoConverter converter) {
         this.addressRepository = addressRepository;
         this.converter = converter;
 
-        addressLogMessage = ResourceBundle.getBundle("i18n/AddressLogMessage", Locale.getDefault());
+        LogMessage = ResourceBundle.getBundle("i18n/AddressLogMessage", Locale.getDefault());
     }
 
     public void createAddress(CreateAddressRequest request) throws AddressNotFoundException{
@@ -39,7 +39,7 @@ public class AddressServiceImpl implements AddressService{
         address.setZipCode(request.getZipCode());
 
         addressRepository.save(address);
-        log.info(addressLogMessage.getString("addressCreated"));
+        log.info(LogMessage.getString("Created"));
     }
 
     public void updateAddress(Long id, UpdateAddressRequest request) throws AddressNotFoundException{
@@ -51,20 +51,20 @@ public class AddressServiceImpl implements AddressService{
         address.setZipCode(request.getZipCode());
 
         addressRepository.save(address);
-        log.info(MessageFormat.format(addressLogMessage.getString("addressUpdated"), id));
+        log.info(MessageFormat.format(LogMessage.getString("Updated"), id));
     }
 
     public void deleteAddress(Long id) throws AddressNotFoundException{
         Address address = findAddressByAddressId(id);
 
         addressRepository.delete(address);
-        log.info(MessageFormat.format(addressLogMessage.getString("addressDeleted"), id));
+        log.info(MessageFormat.format(LogMessage.getString("Deleted"), id));
     }
 
     public AddressDto findAddressById(Long id) throws AddressNotFoundException{
         Address address = findAddressByAddressId(id);
 
-        log.info(MessageFormat.format(addressLogMessage.getString("addressFound"), id));
+        log.info(MessageFormat.format(LogMessage.getString("Found"), id));
         return converter.convert(address);
     }
 
@@ -72,19 +72,19 @@ public class AddressServiceImpl implements AddressService{
         List<Address> addressList = addressRepository.findAll();
 
         if (addressList.isEmpty()) {
-            log.error(addressLogMessage.getString("addressListEmpty"));
+            log.error(LogMessage.getString("ListEmpty"));
             throw new AddressNotFoundException(BusinessMessage.Address.ADDRESS_LIST_EMPTY);
         }
 
-        log.info(addressLogMessage.getString("addressListed"));
+        log.info(LogMessage.getString("Listed"));
         return converter.convert(addressList);
     }
 
 
-    protected Address findAddressByAddressId(Long id) throws AddressNotFoundException{
+    public Address findAddressByAddressId(Long id) throws AddressNotFoundException{
         return addressRepository.findById(id)
                 .orElseThrow(() -> {
-                    log.error(MessageFormat.format(addressLogMessage.getString("addressNotFound"), id));
+                    log.error(MessageFormat.format(LogMessage.getString("NotFound"), id));
                     throw new AddressNotFoundException(BusinessMessage.Address.ADDRESS_NOT_FOUND);
                 });
     }

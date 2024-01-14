@@ -6,12 +6,12 @@ import com.school.schoolManagement.Dto.TeacherDto;
 import com.school.schoolManagement.Model.Teacher;
 
 public interface TeacherService {
-    public void createTeacher(CreateTeacherRequest request);
+    void createTeacher(CreateTeacherRequest request);
 
-    public void updateTeacher(Long id, UpdateTeacherRequest request);
+    void updateTeacher(Long id, UpdateTeacherRequest request);
 
-    public void deleteTeacher(Long id);
+    void deleteTeacher(Long id);
 
-    public TeacherDto findTeacherById(Long id);
+    TeacherDto findTeacherById(Long id);
     Teacher findTeacherByTeacherId(Long id);
 }

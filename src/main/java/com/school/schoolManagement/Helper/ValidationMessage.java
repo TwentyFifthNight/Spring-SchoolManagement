@@ -2,7 +2,7 @@ package com.school.schoolManagement.Helper;
 
 public class ValidationMessage {
     public static class General {
-        public static final String PHONE_REGEX = "^[09]{2}[0-9]{9}$";
+        public static final String PHONE_REGEX = "^(\\+[0-9]{1,3})?[0-9]{9}$";
         public static final String PESEL_REGEX = "^[0-9]{11}$";
     }
 
@@ -32,7 +32,8 @@ public class ValidationMessage {
         public static final String STUDENT_PESEL_NOT_EMPTY = "Student pesel can not be empty";
         public static final String STUDENT_PESEL_NOT_NULL = "Student pesel can not be null";
         public static final String STUDENT_PESEL_NOT_VALID = "Student pesel is not valid, it should be 11 digits";
-        public static final String STUDENT_CLASSROOM_ID_NOT_EMPTY = "Student classroom id can not be empty";
+        public static final String STUDENT_CLASSROOM_ID_NOT_NULL = "Student classroom id can not be empty";
+        public static final String STUDENT_ADDRESS_NOT_NULL = "Student address id can not be empty";
     }
 
     public static class Teacher {
