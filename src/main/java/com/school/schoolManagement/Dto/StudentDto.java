@@ -1,7 +1,7 @@
 package com.school.schoolManagement.Dto;
 
 public record StudentDto(
-        String id,
+        Long id,
         String firstName,
         String lastName,
         String pesel,
