@@ -18,7 +18,8 @@ public class Student {
     private String lastName;
     private String pesel;
     private String studentNumber;
-    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "classroom_id", referencedColumnName = "id")
