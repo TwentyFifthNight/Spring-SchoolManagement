@@ -4,6 +4,7 @@ import com.school.schoolManagement.Dto.AddressDto;
 import com.school.schoolManagement.Dto.Converter.AddressDtoConverter;
 import com.school.schoolManagement.Dto.Request.Address.CreateAddressRequest;
 import com.school.schoolManagement.Dto.Request.Address.UpdateAddressRequest;
+import com.school.schoolManagement.Exception.Address.AddressAlreadyExistException;
 import com.school.schoolManagement.Exception.Address.AddressNotFoundException;
 import com.school.schoolManagement.Helper.BusinessMessage;
 import com.school.schoolManagement.Model.Address;
@@ -31,7 +32,9 @@ public class AddressServiceImpl implements AddressService{
         LogMessage = ResourceBundle.getBundle("i18n/AddressLogMessage", Locale.getDefault());
     }
 
-    public void createAddress(CreateAddressRequest request) throws AddressNotFoundException{
+    public void createAddress(CreateAddressRequest request) throws AddressAlreadyExistException{
+        checkIfAddressExists(request.getHouseNumber(), request.getStreet(), request.getCity(), request.getZipCode());
+
         Address address = new Address();
         address.setHouseNumber(request.getHouseNumber());
         address.setStreet(request.getStreet());
@@ -73,7 +76,7 @@ public class AddressServiceImpl implements AddressService{
 
         if (addressList.isEmpty()) {
             log.error(LogMessage.getString("ListEmpty"));
-            throw new AddressNotFoundException(BusinessMessage.Address.ADDRESS_LIST_EMPTY);
+            throw new AddressNotFoundException(BusinessMessage.Address.LIST_EMPTY);
         }
 
         log.info(LogMessage.getString("Listed"));
@@ -85,7 +88,16 @@ public class AddressServiceImpl implements AddressService{
         return addressRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error(MessageFormat.format(LogMessage.getString("NotFound"), id));
-                    throw new AddressNotFoundException(BusinessMessage.Address.ADDRESS_NOT_FOUND);
+                    throw new AddressNotFoundException(BusinessMessage.Address.NOT_FOUND);
                 });
+    }
+
+    private void checkIfAddressExists(String houseNumber, String street,
+                                      String city, String zipCode) throws AddressAlreadyExistException{
+        if(addressRepository.existsByHouseNumberAndStreetAndCityAndZipCode(houseNumber, street,
+                city, zipCode)){
+            log.error(LogMessage.getString("AlreadyExists"));
+            throw new AddressAlreadyExistException(BusinessMessage.Address.ALREADY_EXISTS);
+        }
     }
 }

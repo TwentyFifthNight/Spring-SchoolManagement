@@ -96,7 +96,7 @@ public class StudentServiceImpl implements StudentService{
     private void checkIfStudentExists(String pesel) throws StudentAlreadyExistException{
         if (studentRepository.existsByPesel(pesel)) {
             log.error(MessageFormat.format(LogMessage.getString("AlreadyExists"), pesel));
-            throw new StudentAlreadyExistException(BusinessMessage.Student.STUDENT_ALREADY_EXISTS);
+            throw new StudentAlreadyExistException(BusinessMessage.Student.ALREADY_EXISTS);
         }
     }
 
@@ -104,7 +104,7 @@ public class StudentServiceImpl implements StudentService{
         return studentRepository.findById(id)
                 .orElseThrow(() -> {
                     log.error(MessageFormat.format(LogMessage.getString("NotFound"), id));
-                    return new StudentNotFoundException(BusinessMessage.Student.STUDENT_NOT_FOUND);
+                    return new StudentNotFoundException(BusinessMessage.Student.NOT_FOUND);
                 });
     }
 }

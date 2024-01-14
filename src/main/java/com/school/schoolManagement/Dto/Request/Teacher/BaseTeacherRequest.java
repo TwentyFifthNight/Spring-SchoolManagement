@@ -12,18 +12,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BaseTeacherRequest {
-    @NotNull(message = ValidationMessage.Teacher.TEACHER_FIRST_NAME_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Teacher.TEACHER_FIRST_NAME_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Teacher.FIRST_NAME_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Teacher.FIRST_NAME_NOT_EMPTY)
     private String firstName;
 
-    @NotNull(message = ValidationMessage.Teacher.TEACHER_LAST_NAME_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Teacher.TEACHER_LAST_NAME_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Teacher.LAST_NAME_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Teacher.LAST_NAME_NOT_EMPTY)
     private String lastName;
 
-    @NotNull(message = ValidationMessage.Teacher.TEACHER_PHONE_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Teacher.TEACHER_PHONE_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Teacher.PHONE_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Teacher.PHONE_NOT_EMPTY)
     @Pattern(regexp = ValidationMessage.General.PHONE_REGEX,
-            message = ValidationMessage.Teacher.TEACHER_PHONE_NOT_VALID)
+            message = ValidationMessage.Teacher.PHONE_NOT_VALID)
     private String phone;
 
 }

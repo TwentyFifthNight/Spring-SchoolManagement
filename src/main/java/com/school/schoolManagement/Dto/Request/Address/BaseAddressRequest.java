@@ -11,19 +11,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BaseAddressRequest {
-    @NotNull(message = ValidationMessage.Address.ADDRESS_HOUSE_NUMBER_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Address.ADDRESS_HOUSE_NUMBER_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Address.HOUSE_NUMBER_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Address.HOUSE_NUMBER_NOT_EMPTY)
     private String houseNumber;
 
-    @NotNull(message = ValidationMessage.Address.ADDRESS_STREET_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Address.ADDRESS_STREET_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Address.STREET_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Address.STREET_NOT_EMPTY)
     private String street;
 
-    @NotNull(message = ValidationMessage.Address.ADDRESS_CITY_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Address.ADDRESS_CITY_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Address.CITY_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Address.CITY_NOT_EMPTY)
     private String city;
 
-    @NotNull(message = ValidationMessage.Address.ADDRESS_ZIPCODE_NOT_NULL)
-    @NotEmpty(message = ValidationMessage.Address.ADDRESS_ZIPCODE_NOT_EMPTY)
+    @NotNull(message = ValidationMessage.Address.ZIPCODE_NOT_NULL)
+    @NotEmpty(message = ValidationMessage.Address.ZIPCODE_NOT_EMPTY)
     private String zipCode;
 }
