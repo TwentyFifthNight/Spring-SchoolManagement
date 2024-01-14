@@ -1,7 +1,8 @@
 package com.school.schoolManagement.Controller;
 
 import com.school.schoolManagement.Dto.AddressDto;
-import com.school.schoolManagement.Dto.Request.Address.BaseAddressRequest;
+import com.school.schoolManagement.Dto.Request.Address.CreateAddressRequest;
+import com.school.schoolManagement.Dto.Request.Address.UpdateAddressRequest;
 import com.school.schoolManagement.Service.AddressService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +20,14 @@ public class AddressController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createAddress(@Valid BaseAddressRequest request) {
+    public ResponseEntity<Void> createAddress(@Valid CreateAddressRequest request) {
         addressService.createAddress(request);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateAddress(@PathVariable Long id,
-                                              @Valid BaseAddressRequest request) {
+                                              @Valid UpdateAddressRequest request) {
         addressService.updateAddress(id, request);
         return ResponseEntity.ok().build();
     }
