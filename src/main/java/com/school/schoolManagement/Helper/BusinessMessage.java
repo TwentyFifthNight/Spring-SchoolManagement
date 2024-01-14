@@ -11,6 +11,16 @@ public class BusinessMessage {
         public static final String ADDRESS_LIST_EMPTY = "Address list is empty";
     }
 
+    public static class Classroom {
+        public static final String CLASSROOM_NOT_FOUND = "Classroom not found";
+        public static final String CLASSROOM_ALREADY_EXISTS = "Classroom already exists";
+        public static final String CLASSROOM_CREATED_SUCCESSFULLY = "Classroom created successfully";
+        public static final String CLASSROOM_UPDATED_SUCCESSFULLY = "Classroom updated successfully";
+        public static final String CLASSROOM_DELETED_SUCCESSFULLY = "Classroom deleted successfully";
+        public static final String CLASSROOM_RETRIEVED_SUCCESSFULLY = "Classroom retrieved successfully";
+        public static final String CLASSROOM_LIST_EMPTY = "Classroom list is empty";
+    }
+
     public static class Student {
         public static final String STUDENT_NOT_FOUND = "Student not found";
         public static final String STUDENT_ALREADY_EXISTS = "Student already exists";

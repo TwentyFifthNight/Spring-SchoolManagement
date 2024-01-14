@@ -15,7 +15,13 @@ public class ValidationMessage {
         public static final String ADDRESS_CITY_NOT_NULL = "Address city can not be null";
         public static final String ADDRESS_ZIPCODE_NOT_EMPTY = "Address zip code can not be empty";
         public static final String ADDRESS_ZIPCODE_NOT_NULL = "Address zip code can not be null";
+    }
 
+    public static class Classroom {
+        public static final String CLASSROOM_SYMBOL_NOT_EMPTY = "Classroom symbol can not be empty";
+        public static final String CLASSROOM_SYMBOL_NOT_NULL = "Classroom symbol can not be null";
+        public static final String CLASSROOM_SUPERVISOR_ID_NOT_EMPTY = "Classroom supervisor id can not be empty";
+        public static final String CLASSROOM_SUPERVISOR_ID_NOT_NULL = "Classroom supervisor id can not be null";
     }
 
     public static class Student {
