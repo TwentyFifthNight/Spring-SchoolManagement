@@ -8,8 +8,14 @@ public class BusinessMessage {
         public static final String STUDENT_UPDATED_SUCCESSFULLY = "Student updated successfully";
         public static final String STUDENT_DELETED_SUCCESSFULLY = "Student deleted successfully";
         public static final String STUDENT_RETRIEVED_SUCCESSFULLY = "Student retrieved successfully";
-        public static final String STUDENT_LIST_EMPTY = "Student list is empty";
-        public static final String STUDENT_FATHER_PHONE_ALREADY_EXISTS = "Student father phone already exists";
-        public static final String STUDENT_MOTHER_PHONE_ALREADY_EXISTS = "Student mother phone already exists";
+    }
+
+    public static class Teacher {
+        public static final String TEACHER_NOT_FOUND = "Teacher not found";
+        public static final String TEACHER_ALREADY_EXISTS = "Teacher already exists";
+        public static final String TEACHER_CREATED_SUCCESSFULLY = "Teacher created successfully";
+        public static final String TEACHER_UPDATED_SUCCESSFULLY = "Teacher updated successfully";
+        public static final String TEACHER_DELETED_SUCCESSFULLY = "Teacher deleted successfully";
+        public static final String TEACHER_RETRIEVED_SUCCESSFULLY = "Teacher retrieved successfully";
     }
 }
