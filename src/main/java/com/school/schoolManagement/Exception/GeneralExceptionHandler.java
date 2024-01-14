@@ -1,5 +1,7 @@
 package com.school.schoolManagement.Exception;
 
+import com.school.schoolManagement.Exception.Student.StudentAlreadyExistException;
+import com.school.schoolManagement.Exception.Student.StudentNotFoundException;
 import com.school.schoolManagement.Exception.Teacher.TeacherAlreadyExistException;
 import com.school.schoolManagement.Exception.Teacher.TeacherNotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -29,6 +31,18 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(StudentAlreadyExistException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<?> handleStudentAlreadyExistException(StudentAlreadyExistException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(StudentNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<?> handleStudentNotFoundException(StudentNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(TeacherAlreadyExistException.class)
