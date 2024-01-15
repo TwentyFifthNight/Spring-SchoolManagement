@@ -69,6 +69,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>SchoolManagement-0.1</finalName>
 	</build>
 
 </project>
