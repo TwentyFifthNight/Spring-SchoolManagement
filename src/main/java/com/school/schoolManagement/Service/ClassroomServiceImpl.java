@@ -1,17 +1,25 @@
 package com.school.schoolManagement.Service;
 
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
 import com.school.schoolManagement.Dto.ClassroomDto;
 import com.school.schoolManagement.Dto.Converter.ClassroomDtoConverter;
 import com.school.schoolManagement.Dto.Request.Classroom.CreateClassroomRequest;
 import com.school.schoolManagement.Dto.Request.Classroom.UpdateClassroomRequest;
 import com.school.schoolManagement.Exception.Classroom.ClassroomAlreadyExistException;
 import com.school.schoolManagement.Exception.Classroom.ClassroomNotFoundException;
+import com.school.schoolManagement.Exception.Classroom.ClassroomStudentListIsEmptyException;
 import com.school.schoolManagement.Helper.BusinessMessage;
 import com.school.schoolManagement.Model.Classroom;
+import com.school.schoolManagement.Model.Student;
 import com.school.schoolManagement.Repository.ClassroomRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Locale;
@@ -94,5 +102,51 @@ public class ClassroomServiceImpl implements ClassroomService{
             log.error(MessageFormat.format(LogMessage.getString("AlreadyExists"), symbol));
             throw new ClassroomAlreadyExistException(BusinessMessage.Classroom.ALREADY_EXISTS);
         }
+    }
+
+    public void generateStudentListPDF(HttpServletResponse response, Long id) throws IOException, ClassroomStudentListIsEmptyException {
+        Document document = new Document(PageSize.A4);
+
+        try {
+            PdfWriter.getInstance(document, response.getOutputStream());
+        } catch (IOException e) {
+            throw new IOException("Error occurred while generating student list PDF");
+        }
+
+        Classroom classroom = findClassroomByClassroomId(id);
+        if(classroom.getStudentList() == null || classroom.getStudentList().isEmpty()) {
+            log.error(MessageFormat.format(LogMessage.getString("StudentListIsEmpty"), id));
+            throw new ClassroomStudentListIsEmptyException(BusinessMessage.Classroom.STUDENT_LIST_EMPTY);
+        }
+
+        document.open();
+        Font fontTitle = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        fontTitle.setSize(18);
+
+        Paragraph paragraph = new Paragraph("Student List", fontTitle);
+        paragraph.setAlignment(Paragraph.ALIGN_CENTER);
+        paragraph.setSpacingAfter(10);
+
+        Font fontParagraph = FontFactory.getFont(FontFactory.HELVETICA);
+        fontParagraph.setSize(12);
+
+        PdfPTable table = new PdfPTable(3);
+        table.setWidths(new int[]{10, 50, 50});
+        table.setWidthPercentage(60);
+        table.addCell(new PdfPCell());
+        table.addCell(new PdfPCell(new Paragraph("Students:")));
+        table.addCell(new PdfPCell(new Paragraph("...................................")));
+
+        List<Student> studentList = classroom.getStudentList();
+        for(int i = 0; i < studentList.size(); i++){
+            Student student = studentList.get(i);
+            table.addCell(new PdfPCell(new Paragraph(String.valueOf(i + 1))));
+            table.addCell(new PdfPCell(new Paragraph(student.getFirstName() + " " + student.getLastName())));
+            table.addCell(new PdfPCell(new Paragraph("...................................")));
+        }
+
+        document.add(paragraph);
+        document.add(table);
+        document.close();
     }
 }

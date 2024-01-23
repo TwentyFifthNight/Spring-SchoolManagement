@@ -19,6 +19,7 @@ public class BusinessMessage {
         public static final String DELETED_SUCCESSFULLY = "Classroom deleted successfully";
         public static final String RETRIEVED_SUCCESSFULLY = "Classroom retrieved successfully";
         public static final String LIST_EMPTY = "Classroom list is empty";
+        public static final String STUDENT_LIST_EMPTY = "Classroom student list is empty";
     }
 
     public static class Student {
