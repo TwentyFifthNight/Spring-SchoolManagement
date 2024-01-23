@@ -3,6 +3,8 @@ package com.school.schoolManagement.Exception;
 import com.school.schoolManagement.Exception.Address.AddressAlreadyExistException;
 import com.school.schoolManagement.Exception.Address.AddressNotFoundException;
 import com.school.schoolManagement.Exception.Classroom.ClassroomAlreadyExistException;
+import com.school.schoolManagement.Exception.Classroom.ClassroomNotFoundException;
+import com.school.schoolManagement.Exception.Classroom.ClassroomStudentListIsEmptyException;
 import com.school.schoolManagement.Exception.Student.StudentAlreadyExistException;
 import com.school.schoolManagement.Exception.Student.StudentNotFoundException;
 import com.school.schoolManagement.Exception.Teacher.TeacherAlreadyExistException;
@@ -54,9 +56,15 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(ClassNotFoundException.class)
+    @ExceptionHandler(ClassroomNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<?> handleClassNotFoundException(ClassNotFoundException ex) {
+    public ResponseEntity<?> handleClassroomNotFoundException(ClassroomNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ClassroomStudentListIsEmptyException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<?> handleStudentListIsEmptyException(ClassroomStudentListIsEmptyException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 

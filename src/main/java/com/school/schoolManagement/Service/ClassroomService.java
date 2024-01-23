@@ -4,7 +4,9 @@ import com.school.schoolManagement.Dto.ClassroomDto;
 import com.school.schoolManagement.Dto.Request.Classroom.CreateClassroomRequest;
 import com.school.schoolManagement.Dto.Request.Classroom.UpdateClassroomRequest;
 import com.school.schoolManagement.Model.Classroom;
+import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ClassroomService {
@@ -19,4 +21,6 @@ public interface ClassroomService {
     Classroom findClassroomByClassroomId(Long id);
 
     List<ClassroomDto> findAllClassrooms();
+
+    void generateStudentListPDF(HttpServletResponse response, Long id) throws IOException;
 }
