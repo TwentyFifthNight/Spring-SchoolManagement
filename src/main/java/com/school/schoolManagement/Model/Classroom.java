@@ -20,6 +20,9 @@ public class Classroom {
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
     private List<Student> studentList;
 
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
+    private List<Course> courseList;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private Teacher supervisor;

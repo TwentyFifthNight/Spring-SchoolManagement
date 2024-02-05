@@ -4,6 +4,7 @@ public class ValidationMessage {
     public static class General {
         public static final String PHONE_REGEX = "^(\\+[0-9]{1,3})?[0-9]{9}$";
         public static final String PESEL_REGEX = "^[0-9]{11}$";
+        public static final String HOUR_REGEX = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$";
     }
 
     public static class Address {
@@ -46,5 +47,17 @@ public class ValidationMessage {
         public static final String PHONE_NOT_EMPTY = "Teacher phone can not be empty";
         public static final String PHONE_NOT_NULL = "Teacher phone can not be null";
         public static final String PHONE_NOT_VALID = "Teacher phone is not valid";
+    }
+
+    public static class Course {
+        public static final String NAME_NOT_EMPTY = "Course name can not be empty";
+        public static final String NAME_NOT_NULL = "Course name can not be null";
+        public static final String DAY_OF_WEEK_NOT_EMPTY = "Course day of week can not be empty";
+        public static final String DAY_OF_WEEK_NOT_NULL = "Course day of week can not be null";
+        public static final String HOUR_NOT_EMPTY = "Course hour can not be empty";
+        public static final String HOUR_NOT_NULL = "Course hour can not be null";
+        public static final String CLASSROOM_ID_NOT_NULL = "Course classroom id can not be empty";
+        public static final String TEACHER_ID_NOT_NULL = "Course teacher id can not be empty";
+        public static final String HOUR_NOT_VALID = "Course hour must be in valid format(7:45, 12:30, etc.)";
     }
 }

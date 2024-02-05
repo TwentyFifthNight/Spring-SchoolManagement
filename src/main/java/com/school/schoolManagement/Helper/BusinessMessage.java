@@ -39,4 +39,16 @@ public class BusinessMessage {
         public static final String DELETED_SUCCESSFULLY = "Teacher deleted successfully";
         public static final String RETRIEVED_SUCCESSFULLY = "Teacher retrieved successfully";
     }
+
+    public static class Course {
+        public static final String NOT_FOUND = "Course not found";
+        public static final String ALREADY_EXISTS_BY_CLASSROOM = "Assigned classroom already have classes at given time";
+        public static final String ALREADY_EXISTS_BY_TEACHER = "Assigned teacher already conduct classes at given time";
+        public static final String CREATED_SUCCESSFULLY = "Course created successfully";
+        public static final String UPDATED_SUCCESSFULLY = "Course updated successfully";
+        public static final String DELETED_SUCCESSFULLY = "Course deleted successfully";
+        public static final String RETRIEVED_SUCCESSFULLY = "Course retrieved successfully";
+        public static final String INVALID_DAY_OF_WEEK = "Course day of week must be valid(MONDAY, TUESDAY...)";
+        public static final String INVALID_HOUR = "Course hour must be valid(12:00, 9:45...)";
+    }
 }
